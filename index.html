@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Palindrome</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Palindrome</h2>
+    <h3>Example</h3>
+    <p>The example shows how the palindrome test works.</p>
+    <table class="example" id="example">
+        <thead>
+        <tr>
+            <th>Sequence nr</th>
+            <th>Input word</th>
+            <th>Expected result === actual result</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Anna</td>
+            <td style="background-color: #2fbe2f">True</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>YellowSubmarine</td>
+            <td style="background-color: #e52e2e">False</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>Here you can add a word and expected result. This will check, whether it is palindrome or not.</p>
+    <div class="addRow">
+        <input type="text" id="word" placeholder="Enter Word">
+        <input type="text" id="result" placeholder="Enter Expected Result">
+        <button type="button" id="add" onclick="addRow();">Add new test</button>
+    </div>
+    <table class="table" id="palindromeTable">
+        <thead>
+            <tr>
+                <th>Sequence nr</th>
+                <th>Input word</th>
+                <th>Expected result === actual result</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+<script>
+    function addRow() {
+        let word = document.getElementById('word').value;
+        let exResult = document.getElementById('result').value;
+        let table = document.getElementById('palindromeTable').getElementsByTagName('tbody')[0];
+        let rows = document.getElementById('palindromeTable').querySelectorAll('tbody tr').length;
+        let nr;
+        if (rows === 0){
+            nr = 1;
+        } else {
+            let lastRow = table.rows[table.rows.length - 1];
+            let lastCell = lastRow.cells[0].innerHTML;
+            nr = parseInt(lastCell) + 1;
+        }
+        let a = "<td>" + nr + "</td>";
+        let b = "<td>" + word + "</td>";
+        let c;
+
+        let acResult = isPalindrome(word).toString();
+        if (acResult === exResult.toLowerCase().trim()){
+            c = "<td style='background-color: #2fbe2f'>" + true + "</td>"
+        } else {
+            c = "<td style='background-color: #e52e2e'>" + false + "</td>"
+        }
+        table.insertRow().innerHTML = a + b + c;
+
+    }
+    function isPalindrome(word) {
+        let wordLT = word.toLowerCase().trim();
+        let reverseWord = word.toLowerCase().trim().split("").reverse().join("");
+        return wordLT === reverseWord;
+    }
+    //console.log (isPalindrome("anna"));
+    //console.log (isPalindrome("Anna"));
+    //console.log (isPalindrome("anna "));
+    //console.log (isPalindrome("YellowSubmarine"));
+
+</script>
+<p style="text-align: right">By Maria Mängel</p>
+</body>
+</html>
+
+
